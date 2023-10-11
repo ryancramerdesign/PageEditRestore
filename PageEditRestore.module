@@ -19,7 +19,7 @@ class PageEditRestore extends WireData implements Module, ConfigurableModule {
 	public static function getModuleInfo() {
 		return array(
 			'title' => 'Page Edit Restore',
-			'version' => 1,
+			'version' => 2,
 			'summary' => 'Prevents page edits in the admin from getting lost when a user session is lost.',
 			'requires' => 'ProcessWire>=3.0.210',
 			'author' => 'Ryan Cramer',
@@ -130,7 +130,7 @@ class PageEditRestore extends WireData implements Module, ConfigurableModule {
 		if($config->ajax) {
 			// add a ping URL handler to page editor for JS
 			$this->addHookMethod('ProcessPageEdit::executePing', function(HookEvent $event) {
-				header('content-type', 'application/json');
+				header('content-type: application/json');
 				$session = $event->wire()->session;
 				$n = (int) $session->getFor($this, 'n'); 
 				$session->setFor($this, 'n', ++$n);
